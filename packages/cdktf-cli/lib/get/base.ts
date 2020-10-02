@@ -8,11 +8,11 @@ import { TerraformProviderConstraint } from './generator/provider-generator';
 export enum Language {
   TYPESCRIPT = 'typescript',
   PYTHON = 'python',
-  DOTNET = 'dotnet',
+  CSHARP = 'csharp',
   JAVA = 'java',
 }
 
-export const LANGUAGES = [ Language.TYPESCRIPT, Language.PYTHON ];
+export const LANGUAGES = [ Language.TYPESCRIPT, Language.PYTHON, Language.CSHARP ];
 
 export interface GetOptions {
   readonly targetLanguage: Language;
@@ -79,6 +79,13 @@ export abstract class GetBase {
             };
           }
 
+          // csharp
+          if (options.targetLanguage === Language.CSHARP) {
+            opts.csharp = {
+              outdir: codeMakerOutdir,
+              namespace: source.replace(/\//gi, '.').replace(/-/gi, '')
+            }
+          }
           await srcmak.srcmak(staging, opts);
         });
       }

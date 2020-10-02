@@ -19,6 +19,10 @@
       "python": {
         "distName": "cdktf",
         "module": "cdktf"
+      },
+      "dotnet": {
+        "packageId": "Hashicorp.Cdktf",
+        "namespace": "Hashicorp.Cdktf"
       }
     }
   },

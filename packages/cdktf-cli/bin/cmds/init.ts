@@ -90,7 +90,8 @@ async function determineDeps(version: string, dist?: string): Promise<Deps> {
     const ret = {
       'npm_cdktf': path.resolve(dist, 'js', `cdktf@${version}.jsii.tgz`),
       'npm_cdktf_cli': path.resolve(dist, 'js', `cdktf-cli-${version}.tgz`),
-      'pypi_cdktf': path.resolve(dist, 'python', `cdktf-${version.replace(/-/g, '_')}-py3-none-any.whl`)
+      'pypi_cdktf': path.resolve(dist, 'python', `cdktf-${version.replace(/-/g, '_')}-py3-none-any.whl`),
+      'nuget_cdktf': path.resolve(dist, 'dotnet', `Hashicorp.Cdktf.${version}.nupkg`)
     };
 
     for (const file of Object.values(ret)) {
@@ -115,7 +116,8 @@ async function determineDeps(version: string, dist?: string): Promise<Deps> {
   return {
     'npm_cdktf': `cdktf@${ver}`,
     'npm_cdktf_cli': `cdktf-cli@${ver}`,
-    'pypi_cdktf': `cdktf~=${version}` // no support for pre-release
+    'pypi_cdktf': `cdktf~=${version}`, // no support for pre-release
+    'nuget_cdktf': version
   };
 }
 
@@ -191,6 +193,7 @@ interface Deps {
   npm_cdktf: string;
   npm_cdktf_cli: string;
   pypi_cdktf: string;
+  nuget_cdktf: string;
 }
 
 interface Project {
